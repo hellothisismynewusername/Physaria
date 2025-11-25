@@ -1,0 +1,155 @@
+Mods: {
+	KineticGore: {
+		Configs: {
+			KineticGoreConfig: {
+				DisplayName: Kinetic Gore Config
+
+				Headers: {
+					Compatibility: Compatibility Settings
+					QualityOfLife: Quality of Life
+					GeneralSettings: General Settings
+					BloodSettings: Blood Settings
+					PhysicsSettings: Physics Settings
+					HeadPhysics: Humanoid Head Physics
+					SlimePhysics: Slime Jiggle Physics
+					VisualAdjustments: Visual Adjustments Header
+				}
+
+				EnableSwingModCompatibility: {
+					Label: Sword and Spear Swing Mod Compatibility
+					Tooltip: Enables special hit detection for mods that change how melee weapons swing. Turn on if you can't hit ragdolls.
+				}
+
+				ArrowsStickToEnemies: {
+					Label: Arrows Stick to Enemies
+					Tooltip: If enabled, arrows will visually stick into enemies and ragdolls for a short time.
+				}
+
+				EnableHeadBanging: {
+					Label: Head Banging (Music)
+					Tooltip: If enabled, humanoids will bob their heads to the beat when near music.
+				}
+
+				CorpseDuration: {
+					Label: Corpse Duration (Ticks)
+					Tooltip: How long bodies stay on the ground. 60 ticks = 1 second.
+				}
+
+				DismembermentChance: {
+					Label: Dismemberment Chance (%)
+					Tooltip: Chance for limbs/heads to fly off upon death or impact.
+				}
+
+				BloodAmountMultiplier: {
+					Label: Blood Amount
+					Tooltip: Multiplier for the amount of blood dust spawned.
+				}
+
+				BloodScale: {
+					Label: Blood Scale
+					Tooltip: Size of the blood particles.
+				}
+
+				BloodVelocity: {
+					Label: Blood Velocity
+					Tooltip: Multiplier for how fast blood spews out.
+				}
+
+				EnableStickyBlood: {
+					Label: Sticky Blood
+					Tooltip: If enabled, blood particles will stick to the ground.
+				}
+
+				StickyBloodDuration: {
+					Label: Sticky Blood Fade Duration
+					Tooltip: How long (in ticks) blood stays fully visible on the floor before fading.
+				}
+
+				BleedDuration: {
+					Label: Neck Bleed Duration
+					Tooltip: How long (in ticks) a body bleeds after decapitation. 60 ticks = 1 second.
+				}
+
+				Gravity: {
+					Label: Gravity
+					Tooltip: How heavy ragdolls feel.
+				}
+
+				Bounciness: {
+					Label: Bounciness
+					Tooltip: How much ragdolls bounce when hitting the ground.
+				}
+
+				Friction: {
+					Label: Friction
+					Tooltip: How much ragdolls slide on the ground (Lower = Slippery, Higher = Sticky).
+				}
+
+				KnockbackMultiplier: {
+					Label: Knockback Force
+					Tooltip: Multiplier for how far bodies fly when hit.
+				}
+
+				HeadBobIntensity: {
+					Label: Head Bob Intensity
+					Tooltip: How much humanoid heads wobble while walking alive.
+				}
+
+				EnableHeadFlinching: {
+					Label: Head Flinching
+					Tooltip: If enabled, heads will physically react to hits.
+				}
+
+				ReverseHeadFlinch: {
+					Label: Reverse Head Flinch Direction
+					Tooltip: If enabled, heads will snap backwards instead of forwards when hit.
+				}
+
+				HeadSpringStiffness: {
+					Label: Neck Stiffness
+					Tooltip: How strongly the head tries to stay attached to the body angle.
+				}
+
+				HeadSpringDamping: {
+					Label: Neck Damping
+					Tooltip: Air resistance for the head wobble (Higher = less wobble).
+				}
+
+				SlimeJiggleIntensity: {
+					Label: Slime Jiggle Intensity
+					Tooltip: How much slimes stretch and squash while moving.
+				}
+
+				SlimeSpringStiffness: {
+					Label: Slime Stiffness
+					Tooltip: How rigid the slime body is.
+				}
+
+				SlimeSpringDamping: {
+					Label: Slime Damping
+					Tooltip: How fast the slime jiggle stops.
+				}
+
+				HumanoidVerticalOffset: {
+					Label: Humanoid Vertical Offset
+					Tooltip: Adjust this if Humanoid NPCs are floating or sinking.
+				}
+
+				GibAmountMultiplier: {
+					Label: Gib Amount Multiplier
+					Tooltip: Controls the amount of solid body parts (gibs) from hits.
+				}
+
+				LegacyRagdollPhysics: {
+					Label: Legacy Ragdoll Physics
+					Tooltip: Reverts physics to the older, spinnier version.
+				}
+
+				EnableRagdollCollision: {
+					Label: Enable Ragdoll Collision
+					Tooltip: Allows ragdolls to stack and collide with each other.
+				}
+			}
+		}
+	}
+}
