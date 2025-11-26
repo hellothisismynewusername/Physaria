@@ -750,9 +750,13 @@ namespace KineticGore
 
 		public override void OnSpawn(IEntitySource source)
 		{
-            this.npcType = (int) Main.npc[(int) base.Projectile.ai[0]].type;
-            this.netID = Main.npc[(int) base.Projectile.ai[0]].netID;
-            this.npcScale = Main.npc[(int) base.Projectile.ai[0]].scale;
+
+            if ((int) base.Projectile.ai[0] < Main.npc.Length)
+			{
+                this.npcType = (int) Main.npc[(int) base.Projectile.ai[0]].type;
+                this.netID = Main.npc[(int) base.Projectile.ai[0]].netID;
+				this.npcScale = Main.npc[(int) base.Projectile.ai[0]].scale;
+            }
         }
 
 		public override void AI()
