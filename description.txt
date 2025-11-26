@@ -1,0 +1,50 @@
+[b]TLDR:[/b]
+A mod that adds an entire ragdoll and body physics engine to terraria with new gore, blood, and gib mechanics.
+
+
+[b][h1]DESCRIPTION:[/h1][/b]
+Physaria purely cosmetically transforms enemy deaths in Terraria by replacing boring, vanilla gore explosions with physics-driven ragdolls, introducing dismemberment on hit, realistic particle dynamics for blood, entity head physics, and several visual and quality-of-life enhancements for humanoid and slime entities. Like the title says, this is a gore, physics, ragdoll and immersion expansion to the game in a completely cosmetic way! So this mod will work with everything. There are even some [b]compatibility patches[/b] in the mod config.
+
+This mod is heavily built around Sword (And Spear) Swing's mod mechanics, so it is highly suggested you play both mods together for the ultimate experience. The link to Sword (And Spear) Swing is at the bottom of the description in the compatibility section.
+
+[b][h1]Key Features[/h1][/b]
+- Physics-Based Ragdolls: Enemies collapse into full-body ragdolls that obey gravity, friction, and bounce, rolling down slopes or hills upon death. Flying enemies crash and splatter instantly on impact.
+
+- Persistent Corpses: Dead bodies remain visible on the ground, fading out slowly after a configurable duration.
+
+- {NEW} Ragdoll Collision: Dynamic collision between multiple ragdolls, allowing them to pile up on top of eachother. // Suggested by user @coffee009
+
+[b]Dynamic Dismemberment & Gore:[/b]
+- Enemies have a chance to be decapitated or lose limbs upon death.
+
+- Ragdolls can be struck on the ground, causing further dismemberment (gibs and blood) and launching them realistically.
+
+- Decapitated ragdolls feature a physics-driven, rolling head and a blood spray from the neck. Legs can also be chopped off.
+
+- Sticky Blood: Blood particles stop moving when they hit the ground, forming visible pools that slowly fade out after a configurable duration.
+
+- {NEW} Gibs: New and improved small gibs and gore chunks come out of enemies when you hit them. This can be customisable in config.
+
+[b]Humanoid Head & Normal Physics (Live Entities):[/b]
+- Head Bob: Humanoid entities (including NPCs) exhibit subtle, physics-based head wobbling while moving. Like that one Hawaiian bobble head that sits in the car. 
+
+- Head Flinching: Heads react physically to being struck by weapons or projectiles, snapping back and wobbling realistically.
+
+- Head Banging: Humanoids will smoothly bob their heads to the beat when near a player playing a musical instrument, and face the musician.
+
+- Slime Jiggle Physics: Slime entities deform, compress, and stretch dynamically while moving, falling, and colliding with the environment.
+
+- Fluid Dynamics: Ragdolls are buoyant and float in water, moving slowly and resisting gravity.
+
+- Arrow Sticking (By default off): Arrows visually stick into live enemies and ragdolls for a short duration before disappearing.
+
+[b][h1]Compatibility![/h1][/b]
+This mod works flawlessly with most mods as for the most part as it is purely cosmetic. There is a patch for [b]<i><u>[/b]'s [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3163841660]Sword (And Spear) Swing[/url] mod to make it work perfectly with this mod, which I HIGHLY suggest pairing the two mods as it adds SO much more interaction to the game in a completely new way paired with this mod. Pairing this, <i><u>'s Sword (And Spear) Swing mod, and my other mod [b]<i><u>[/b]'s [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609534979]Motion Blur for Terraria[/url], the game will essentially turn into Terraria: Half Sword edition (im sure someone will get this reference).
+
+[b][h1]Customizable Settings![/h1][/b] 
+Nearly EVERY physical property, duration, chance, and visual effect (like blood scale, gravity, friction, head stiffness) is adjustable via an in-game Mod Configuration menu.
+
+
+[i]For those wondering, the name of this mod was inspired by "Euphoria", as it is the GTA physics engine that is known to be the best physics engine of all time when it comes to ragdoll interaction. This mod aims to merge Terraria and a ragdoll physics engine![/i]
+
+Check change notes for updates.
