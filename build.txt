@@ -1,5 +1,5 @@
 displayName = [c/0096FF:Physaria]
 name = Physaria
 author = LevitatingGT
-version = 2.7.5
+version = 2.8.1
 languageVersion = latest

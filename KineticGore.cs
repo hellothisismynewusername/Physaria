@@ -335,9 +335,15 @@ namespace KineticGore
 		public float liveHeadWobble = 0f;
 		public float squashCompression = 1f;
 
-		private bool IsHumanoid(NPC npc) => npc.aiStyle == 3 || npc.townNPC;
+        private bool IsSpider(NPC npc) => npc.type == NPCID.WallCreeper || npc.type == NPCID.WallCreeperWall ||
+                                          npc.type == NPCID.BloodCrawler || npc.type == NPCID.BloodCrawlerWall ||
+                                          npc.type == NPCID.BlackRecluse || npc.type == NPCID.BlackRecluseWall ||
+                                          npc.type == NPCID.JungleCreeper || npc.type == NPCID.JungleCreeperWall ||
+                                          npc.type == 513; // Sand Poacher (ID 513)
+
+		private bool IsHumanoid(NPC npc) => (npc.aiStyle == 3 || npc.townNPC) && !IsSpider(npc);
 		private bool IsSlime(NPC npc) => npc.aiStyle == 1 || npc.type == NPCID.BlueSlime || npc.type == NPCID.GreenSlime;
-		private bool ShouldIgnore(NPC npc) => npc.boss || npc.lifeMax < 5 || (npc.friendly && !npc.townNPC);
+		private bool ShouldIgnore(NPC npc) => npc.boss || NPCID.Sets.ShouldBeCountedAsBoss[npc.type] || npc.lifeMax < 5 || (npc.friendly && !npc.townNPC);
 
 		private bool IsMusicPlaying(NPC npc)
 		{
@@ -518,6 +524,23 @@ namespace KineticGore
 
 					if (newGores.Count > 0)
 					{
+						// FILTER: Remove large gores (Heads, Torsos) immediately
+						// We iterate backwards to safely remove from list
+						for (int i = newGores.Count - 1; i >= 0; i--)
+						{
+							int gIndex = newGores[i];
+							Gore g = Main.gore[gIndex];
+
+							// Threshold: If both width and height are substantial, it's likely a head/torso.
+							// Limbs are usually thin (small width OR small height).
+							// 20x20 is usually the max size for a "small" debris chunk.
+							if (g.Width >= 20 && g.Height >= 20)
+							{
+								g.active = false;
+								newGores.RemoveAt(i);
+							}
+						}
+
 						// Sort by Size (Smallest first)
 						newGores.Sort((a, b) => (Main.gore[a].Width * Main.gore[a].Height).CompareTo(Main.gore[b].Width * Main.gore[b].Height));
 
@@ -718,10 +741,23 @@ namespace KineticGore
 			set => Projectile.localAI[1] = value;
 		}
 
+        private bool IsSpider()
+        {
+            return npcType == NPCID.WallCreeper ||
+                   npcType == NPCID.WallCreeperWall ||
+                   npcType == NPCID.BloodCrawler ||
+                   npcType == NPCID.BloodCrawlerWall ||
+                   npcType == NPCID.BlackRecluse ||
+                   npcType == NPCID.BlackRecluseWall ||
+                   npcType == NPCID.JungleCreeper ||
+                   npcType == NPCID.JungleCreeperWall ||
+                   npcType == 513; // Sand Poacher (ID 513)
+        }
+
 		private bool IsHumanoid()
 		{
 			NPC sample = ContentSamples.NpcsByNetId[npcType];
-			return sample.aiStyle == 3 || sample.townNPC;
+			return (sample.aiStyle == 3 || sample.townNPC) && !IsSpider();
 		}
 
 		private bool IsSlime()
@@ -750,13 +786,32 @@ namespace KineticGore
 
 		public override void OnSpawn(IEntitySource source)
 		{
-
-            if ((int) base.Projectile.ai[0] < Main.npc.Length)
+			// FLAG SYSTEM CHECK
+			// If ai[1] has the flag 1000, it means ai[0] is a raw NPC ID, not an Index.
+			if (Projectile.ai[1] >= 1000f)
 			{
-                this.npcType = (int) Main.npc[(int) base.Projectile.ai[0]].type;
-                this.netID = Main.npc[(int) base.Projectile.ai[0]].netID;
-				this.npcScale = Main.npc[(int) base.Projectile.ai[0]].scale;
-            }
+				Projectile.ai[1] -= 1000f; // Remove flag immediately
+
+				this.npcType = (int)Projectile.ai[0];
+				this.netID = this.npcType;
+
+				// Attempt to get default scale from samples
+				if (ContentSamples.NpcsByNetId.TryGetValue(this.netID, out NPC sample))
+					this.npcScale = sample.scale;
+				else
+					this.npcScale = 1f;
+			}
+			else
+			{
+				// STANDARD SPAWN (Death)
+				// ai[0] is an index into Main.npc[]
+				if ((int) base.Projectile.ai[0] < Main.npc.Length)
+				{
+					this.npcType = (int) Main.npc[(int) base.Projectile.ai[0]].type;
+					this.netID = Main.npc[(int) base.Projectile.ai[0]].netID;
+					this.npcScale = Main.npc[(int) base.Projectile.ai[0]].scale;
+				}
+			}
         }
 
 		public override void AI()
@@ -1137,7 +1192,10 @@ namespace KineticGore
 					dismemberType = 1; // Headless Body
 					bleedTimer = config.BleedDuration;
 					int projType = ModContent.ProjectileType<PhysicsCorpse>();
-					float headAI = (isFlyingEntity ? 1f : 0f) + (30f);
+
+					// ADDED 1000f FLAG: Tells OnSpawn that 'npcType' (ai0) is a Raw ID, not an Index
+					float headAI = (isFlyingEntity ? 1f : 0f) + (30f) + 1000f;
+
 					Vector2 spawnPos = Projectile.Center + new Vector2(0, -10).RotatedBy(Projectile.rotation);
 					Vector2 headLaunch = Projectile.velocity * 1.1f + new Vector2(hitDir * 2, -3);
 
@@ -1150,7 +1208,9 @@ namespace KineticGore
 					dismemberType = 4; // Legless Body (Upper)
 
 					int projType = ModContent.ProjectileType<PhysicsCorpse>();
-					float legsAI = (isFlyingEntity ? 1f : 0f) + (50f); // Type 5 = Legs
+
+					// ADDED 1000f FLAG: Tells OnSpawn that 'npcType' (ai0) is a Raw ID, not an Index
+					float legsAI = (isFlyingEntity ? 1f : 0f) + (50f) + 1000f; // Type 5 = Legs
 
 					Vector2 legsLaunch = Projectile.velocity * 0.8f + new Vector2(hitDir * 1.5f, -1);
 
@@ -1250,15 +1310,27 @@ namespace KineticGore
 				dummy.life = -1;
 				dummy.active = true;
 
+				// Force ShouldIgnore to TRUE so our GlobalNPC doesn't delete the gores we are about to spawn
+				dummy.lifeMax = 1;
+
 				NPC.HitInfo hit = new NPC.HitInfo();
 				hit.Damage = 50;
 				hit.Knockback = 6f;
 				hit.HitDirection = Math.Sign(Projectile.velocity.X);
+				if (hit.HitDirection == 0) hit.HitDirection = 1;
 
 				dummy.HitEffect(hit);
 				dummy.active = false;
 			}
 			catch { }
+
+			// --- SPAWN SMOKE CLOUDS (Black Pillows) ---
+			for (int i = 0; i < 3; i++)
+			{
+				Vector2 smokeVel = Main.rand.NextVector2Circular(2, 2) - new Vector2(0, 1);
+				// Gores 61, 62, 63 are the standard "Smoke" puffs
+				Gore.NewGore(Projectile.GetSource_Death(), Projectile.Center, smokeVel, Main.rand.Next(61, 64), 0.7f);
+			}
 
 			Projectile.Kill();
 		}

@@ -48,3 +48,4 @@ Nearly EVERY physical property, duration, chance, and visual effect (like blood 
 [i]For those wondering, the name of this mod was inspired by "Euphoria", as it is the GTA physics engine that is known to be the best physics engine of all time when it comes to ragdoll interaction. This mod aims to merge Terraria and a ragdoll physics engine![/i]
 
 Check change notes for updates.
+[h1]SOME CODE AND BUGFIXES WRITTEN BY USER <i><u>. CHECK CHANGE NOTES FOR CREDIT[/h1]
