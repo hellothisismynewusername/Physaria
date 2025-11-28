@@ -1,5 +1,0 @@
-displayName = [c/0096FF:Physaria]
-name = Physaria
-author = LevitatingGT
-version = 2.7.3
-languageVersion = latest
